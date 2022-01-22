@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import defaultProfilePic from "../../public/defaultProfilePic.png";
+
 import Cookies from "js-cookie";
 import { useState } from "react";
 import axios from "axios";
@@ -38,7 +38,7 @@ export default function Home() {
         </div>
 
         <div className="w-screen flex flex-col items-center h-5/6">
-          <Image src={defaultProfilePic} alt="" />
+          <Image src="/defaultProfilePic" alt="" />
           <h1 className="mt-[10px] font-bold font-raleway text-[24px] text-[#432C81]">
             User&apos;s Full Name
           </h1>
