@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         doctor: doctor._id,
         prescription: {
           name: req.body.nameOfPrescription,
-          reason: req.body.prescriptionReason,
+          prescriptionReason: req.body.prescriptionReason,
           startDate: req.body.StartDate,
           endDate: req.body.EndDate,
           time: req.body.Time,

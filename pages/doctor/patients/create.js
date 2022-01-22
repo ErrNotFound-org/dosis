@@ -13,7 +13,7 @@ export default function Home() {
   const [heading, setHeading] = useState("")
   const [reason, setReason] = useState("")
   const [comments, setComments] = useState("")
-  const [prescription, setPrescription] = useState("")
+  const [name, setName] = useState("")
   const [prescriptionReason, setPrescriptionReason] = useState("")
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
@@ -131,8 +131,8 @@ if(!user){
               type="text"
               placeholder="Name of the Prescription(s)"
               className="border-[5px] border-solid border-black h-[35px] w-[374px] rounded-[15px] p-[15px] font-roboto text-[15px] block mt-[30px]"
-              value={prescription}
-              onChange={(e) => setPrescription(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="flex">
