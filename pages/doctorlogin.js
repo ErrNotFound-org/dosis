@@ -70,7 +70,7 @@ export default function Home() {
               </label>
               <input
                 type="email"
-                className="block mt-[20px] h-[73px] w-[722px] rounded-[10px]"
+                className="block mt-[20px] h-[73px] w-[722px] rounded-[10px] p-[20px]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -81,7 +81,7 @@ export default function Home() {
               </label>
               <input
                 type="password"
-                className="block mt-[20px] h-[73px] w-[722px] rounded-[10px]"
+                className="block mt-[20px] h-[73px] w-[722px] rounded-[10px] p-[20px]"
                  value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -110,7 +110,7 @@ export default function Home() {
           <h1 className="font-inter font-bold text-[20px]">
             Have you ever wondered, why there isn &apos;t a single management
             platform for all our health needs? One that maintains not only the
-            entiretry of the patient&apos;s medical history and lab results but
+            entirety of the patient&apos;s medical history and lab results but
             that also serves you. The Doctor. Dosis was built with both medical
             professionals and patients in mind to provide the best possible
             medical experience possible. We are here to help you. We are here to
