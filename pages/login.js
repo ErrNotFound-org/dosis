@@ -11,6 +11,7 @@ import axios from "axios";
 export default function Home() {
   const [cookie, setCookie] = useCookies(["user"])
   const router = useRouter();
+  var test = 'test';
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
