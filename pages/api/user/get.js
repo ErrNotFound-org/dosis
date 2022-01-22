@@ -3,7 +3,7 @@ import { connectToDatabase } from "../../../models/db";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const token = req.body.token;
-    console.log(token)
+    console.log(token + " This is from the get request")
     if (!token) {
         res.status(400).json({ message: "Please enter token" });
     }

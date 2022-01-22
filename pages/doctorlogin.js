@@ -1,6 +1,57 @@
 import Image from "next/image";
+import { useCookies } from "react-cookie";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Home() {
+
+  const [cookie, setCookie] = useCookies(["user"]);
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [state, setState] = useState("IDLE");
+
+  const subscribe = async (e) => {
+    e.preventDefault();
+    setState("LOADING");
+    setErrorMessage(null);
+
+    try {
+      const response = await axios.post("/api/doctor/signin", {
+        email,
+        password,
+      });
+
+      const data = response.data;
+      setCookie("user", JSON.stringify(data), {
+        path: "/",
+        maxAge: 3600, // 1 hr
+        sameSite: true,
+      });
+
+      console.log(data);
+
+      if (response.data.message === "Logged in successfully") {
+        router.push("/doctor");
+        setState("SUCCESS");
+      } else {
+        setErrorMessage(response.data.message);
+        setState("ERROR");
+      }
+
+      console.log("Hello World");
+    } catch (e) {
+    
+      setErrorMessage(e.response);
+      // setState("ERROR");
+    }
+  };
+
+
   return (
     <div className="h-screen w-screen grid grid-cols-2">
       <div className="bg-[#6CB4EE]">
@@ -20,6 +71,8 @@ export default function Home() {
               <input
                 type="email"
                 className="block mt-[20px] h-[73px] w-[722px] rounded-[10px]"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="m-[10px]">
@@ -29,11 +82,16 @@ export default function Home() {
               <input
                 type="password"
                 className="block mt-[20px] h-[73px] w-[722px] rounded-[10px]"
+                 value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div className="w-full flex justify-center items-center">
-                <button className="m-[20px] bg-white p-[10px] px-[20px] rounded-md font-raleway text-[#6CB4EE]">
+                <button        onClick={subscribe} className="m-[20px] bg-white p-[10px] px-[20px] rounded-md font-raleway text-[#6CB4EE]">
                   Submit
                 </button>
+
+                  {state === "ERROR" && <p>{errorMessage}</p>}
+                {state === "SUCCESS" && <p>Success!</p>}
               </div>
             </div>
           </form>
@@ -42,7 +100,7 @@ export default function Home() {
       <div className="bg-[#e4e4e4] h-screen">
         <div className="h-1/2 flex justify-center items-center">
           <Image
-            src="./doctorLogIn.png"
+            src="/doctorLogIn.png"
             alt=""
             width={835.89}
             height={468.63}

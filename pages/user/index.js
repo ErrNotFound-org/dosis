@@ -1,7 +1,35 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
+import Cookies from 'js-cookie'
+
 
 export default function Home() {
+  let user = Cookies.get("user")
+  const [username, setUsername] = useState ('')
+
+  async function getUser(token) {
+    const userFound = await axios.post('/api/user/get', {token});
+    console.log(userFound.data);
+    setUsername(userFound.data.user.username);
+    return userFound;
+    // ``
+  }
+
+  if(!user){
+    return(
+      <h1>You're not logged in</h1>
+
+
+    )
+  }
+  else{
+    user = JSON.parse(user)
+    user= getUser(user.token)
+
   return (
     <div className="h-screen">
       <div className="w-screen flex flex-row justify-center items-center h-1/6 px-[16px] py-[32px]">
@@ -51,7 +79,7 @@ export default function Home() {
         <div className="w-2/6 flex-col">
           <div className="h-2/6 flex flex-col justify-center items-center text-right float-right">
             <h1 className="font-roboto font- text-[50px] mb-[40px]">
-              Hey, Bobby3105
+              Hey, {username}
             </h1>
             <hr className="w-[600px] border-solid border-1 border-black" />
           </div>
@@ -120,4 +148,5 @@ export default function Home() {
       </div>
     </div>
   );
+}
 }

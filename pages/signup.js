@@ -3,7 +3,64 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
+
 export default function Signup() {
+  const [cookie, setCookie] = useCookies(["user"]);
+
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [state, setState] = useState("IDLE");
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const subscribe = async (e) => {
+    e.preventDefault();
+    setState("LOADING");
+    setErrorMessage(null);
+
+    console.log("Hello World");
+    try {
+      console.log("Hello");
+
+      const response = await axios.post("/api/signup", {
+        email,
+        name,
+        password,
+      });
+      
+      console.log(response);
+      const data = response.data;
+
+      console.log("Hello World");
+      console.log(data);
+
+      setCookie("user", JSON.stringify(data), {
+        path: "/",
+        maxAge: 3600, // 1 hr
+        sameSite: true,
+      });
+
+      if (response.data.message === "Data inserted!") {
+        router.push("/user");
+        setState("SUCCESS");
+      } else {
+        setErrorMessage(response.data.message);
+        setState("ERROR");
+      }
+    } catch (e) {
+      console.log(e);
+      setErrorMessage(e.response);
+    }
+  };
+
+
+
   return (
     <div className="h-screen flex">
       <div className="w-7/12 bg-[#7CB9E8] h-screen pt-32">
@@ -44,21 +101,30 @@ export default function Signup() {
               type="text"
               className="border-[1px] border-[#EDECF4] border-solid rounded-[8px] w-[327px] h-[46px] placeholder:text-[#432C81] placeholder:text-[16px] font-raleway p-[10px] mb-[20px]"
               placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               type="email"
               className="border-[1px] border-[#EDECF4] border-solid rounded-[8px] w-[327px] h-[46px] placeholder:text-[#432C81] placeholder:text-[16px] font-raleway p-[10px] mb-[20px] block"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               className="border-[1px] border-[#EDECF4] border-solid rounded-[8px] w-[327px] h-[46px] placeholder:text-[#432C81] placeholder:text-[16px] font-raleway p-[10px] mb-[20px]"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="bg-[#432C81] block text-white mt-[70px] rounded-[8px] w-[327px] h-[42px] font-raleway p-[10px] mb-[20px]">
+            <button onClick={subscribe} className="bg-[#432C81] block text-white mt-[70px] rounded-[8px] w-[327px] h-[42px] font-raleway p-[10px] mb-[20px]">
               Sign Up
             </button>
+            
+            {state === "ERROR" && <p>{errorMessage}</p>}
+            {state === "SUCCESS" && <p>Success!</p>}
 
             <p className="text-[#82799D] font-raleway text-[14px]">
               Already have an account?{" "}
