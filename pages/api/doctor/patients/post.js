@@ -2,12 +2,23 @@ import { connectToDatabase } from "../../../../models/db";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
+    function makeid(length) {
+      var result           = '';
+      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+         result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+
     const token = req.body.token;
     // console.log(token)
     const { db, users, doctors } = await connectToDatabase();
     const doctor = await doctors.findOne({ token: token });
     if (doctor){
       const data = {
+        id: makeid(10),
         heading: req.body.heading,
         reason: req.body.reason,
         comments: req.body.comments,

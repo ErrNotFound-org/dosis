@@ -8,7 +8,11 @@ import {useRouter} from "next/router"
 // postnumber file
 
 export default function Home() {
-const router = useRouter();
+  const id = router.query.postNumber; 
+  const router = useRouter();
+
+  
+
 
 
   var user = Cookies.get("user");

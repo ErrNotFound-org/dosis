@@ -8,34 +8,30 @@ import {useRouter} from "next/router"
 
 export default function Home() {
 
+  const variable = "1";
+
   const router = useRouter();
 
-
-  var variable = 1;
+  
+  let medicalHistory;
 
   var user = Cookies.get("user");
-  console.log("This is the cookie: " + user)
+  // console.log("This is the cookie: " + user)
   const [username, setUsername] = useState("");
 
   async function getUser(token) {
     const userFound = await axios.post(`/api/doctor/get`, { token });
-    console.log(userFound.data);
-    
-    // If the token was not found then do the FOLLOWING (DOWN ARROW)
-  
+    // console.log(userFound.data);
     if (userFound.data.message === "Incorrect token"){
-
-          router.push("/user")
+      router.push("/user")
     } else{
-      console.log("Hello World")
-   setUsername(userFound.data.user.username);
-     return userFound;
+      // console.log("Hello World")
+      setUsername(userFound.data.user.username);
+      medicalHistory = userFound.data.user.medicalHistory;
+    console.log(medicalHistory)
+    return userFound;
     }
-    
- 
-   
   }
-
 
   if (!user) {
     return <h1>Not LOGGED IN</h1>;
@@ -43,8 +39,6 @@ export default function Home() {
 
     user = JSON.parse(user);
     const userResult = getUser(user.token);
-    console.log(userResult)
-
 
   return (
     <div className="h-screen">
