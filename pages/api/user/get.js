@@ -14,7 +14,8 @@ export default async function handler(req, res) {
         res.status(201).json({ message: "User Found!", user: result });
     }
     else {
-        res.status(404).json({ message: "Incorrect token" });
+        res.status(201).json({ message: "Incorrect token" });
+        console.log('Incorrect token')
     }
   }
 }

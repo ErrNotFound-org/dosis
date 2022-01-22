@@ -10,13 +10,21 @@ import Cookies from 'js-cookie'
 export default function Home() {
   let user = Cookies.get("user")
   const [username, setUsername] = useState ('')
+  const router = useRouter();
 
   async function getUser(token) {
     const userFound = await axios.post('/api/user/get', {token});
     console.log(userFound.data);
-    setUsername(userFound.data.user.username);
-    return userFound;
-    // ``
+    if(userFound.data.message === "Incorrect token"){
+      router.push("/doctor")
+    }else{
+      console.log("hello world")
+      setUsername(userFound.data.username);
+      return userFound;
+
+    }
+    // setUsername(userFound.data.user.username);
+    // return userFound;
   }
 
   if(!user){

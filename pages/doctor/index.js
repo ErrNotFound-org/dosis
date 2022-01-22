@@ -7,7 +7,9 @@ import {useRouter} from "next/router"
 import Image from "next/image";
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
+
+
   var user = Cookies.get("user");
   console.log("This is the cookie: " + user)
   const [username, setUsername] = useState("");
@@ -15,6 +17,8 @@ export default function Home() {
   async function getUser(token) {
     const userFound = await axios.post(`/api/doctor/get`, { token });
     console.log(userFound.data);
+    
+    // If the token was not found then do the FOLLOWING (DOWN ARROW)
   
     if (userFound.data.message === "Incorrect token"){
 
