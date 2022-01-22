@@ -4,16 +4,24 @@ import LabCard from "../../components/LabCard";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import axios from "axios";
-
+import { useRouter } from "next/router";
 export default function Home() {
   var user = Cookies.get("user");
   const [username, setUsername] = useState("");
+// linux push
+  const router = useRouter();
 
   async function getUser(token) {
     const userFound = await axios.post(`/api/user/get`, { token });
     console.log(userFound.data);
-    setUsername(userFound.data.user.username);
-    return userFound;
+    console.log(userFound.data)
+    if(userFound.data.message === "Incorrect token"){
+      router.push("/doctor")
+    }else{
+      console.log("hello world this is the first time am seeing you")
+      setUsername(userFound.data.username)
+      return userFound;
+    }
   }
 
   if (!user) {
@@ -28,7 +36,7 @@ export default function Home() {
             <Link passHref={true} href="/user">
               <a>
                 <div></div>
-                <Image src="/arrow" w={149} h={46} alt="" />
+                <Image src="/arrow.png" width={149} height={46} alt="" />
               </a>
             </Link>
           </div>
