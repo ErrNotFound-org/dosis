@@ -15,10 +15,10 @@ export default async function handler(req, res) {
         doctor: doctor._id,
         prescription: {
           name: req.body.nameOfPrescription,
-          reason: req.body.reason,
-          StartDate: req.body.StartDate,
-          EndDate: req.body.EndDate,
-          Time: req.body.Time,
+          reason: req.body.prescriptionReason,
+          startDate: req.body.StartDate,
+          endDate: req.body.EndDate,
+          time: req.body.Time,
         }
       };
       const notif = {
@@ -37,4 +37,4 @@ export default async function handler(req, res) {
       };
     }
     res.status(201)
-  }
+}
