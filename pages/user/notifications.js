@@ -1,7 +1,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import notifications from "../../public/notifications.png";
 import NotificationCard from "../../components/NotificationCard";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -78,7 +77,7 @@ export default function Home() {
             />
           </div>
           <div className="w-1/6 mr-[40px]">
-            <Image src={notifications} alt="" />
+            <Image src="/notifications" alt="" />
           </div>
         </div>
       </div>
