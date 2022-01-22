@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 export default function Home() {
   var user = Cookies.get("user");
   const [username, setUsername] = useState("");
-
+// linux push
   const router = useRouter();
 
   async function getUser(token) {
