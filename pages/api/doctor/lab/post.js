@@ -2,7 +2,7 @@ import { connectToDatabase } from "../../../../models/db";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const token = req.headers.token;
+    const token = req.body.token;
     // console.log(token)
     const { db, users, doctors } = await connectToDatabase();
     const doctor = await doctors.findOne({ token: token });
