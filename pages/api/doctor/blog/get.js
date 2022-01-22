@@ -10,8 +10,12 @@ export default async function handler(req, res) {
         const blog = await db.collection("blogs").findOne({ _id: blogID });
         if (blog){
             res.status(200).json({ blog: blog });
-        }
-      };
+        }else{
+          res.status(201).json({ message: "Invalid Blog ID!" });
+      }
+    }else{
+      res.status(201).json({ message: "Invalid Token!" });
     }
     res.status(201)
   }
+}

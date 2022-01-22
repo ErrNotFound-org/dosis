@@ -9,6 +9,8 @@ export default async function handler(req, res) {
     if (user && member) {
         await user.updateOne({"token": token}, {$push: {family: member._id}}, {upsert: true})
         res.status(200).json({ message: "Successfully added member to family" });
+    }else{
+      res.status(201).json({ message: "User Not Found or Invalid Token!" })
     }
   }
 }

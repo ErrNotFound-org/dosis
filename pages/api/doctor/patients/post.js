@@ -33,8 +33,12 @@ export default async function handler(req, res) {
           await users.updateOne({ _id: data.user }, { $push: { medicalHistory: data } }, { upsert: true });
           await users.updateOne({ _id: data.user }, { $push: { notifications: notif } }, { upsert: true });
           res.status(201).json({ message: "Data inserted!", data: data });
+        }else{
+          res.status(201).json({ message: "User Not Found!" })
         }
-      };
+      }else{
+        res.status(201).json({ message: "Invalid Token!" })
+      }
     }
     res.status(201)
 }

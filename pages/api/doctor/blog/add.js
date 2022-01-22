@@ -32,7 +32,9 @@ export default async function handler(req, res) {
         await db.collection("blogs").insertOne(data);
         await db.collection("doctors").updateOne({ _id: doctor._id }, { $push: { blogs: data._id } });
         res.status(200).json({ message: "Blog added" });
-      };
+      }else{
+        res.status(201).json({ message: "Invalid Token!" });
+      }
     }
     res.status(201)
   }

@@ -22,6 +22,8 @@ export default async function handler(req, res) {
           await user.updateOne({"token": token}, data)
         }
         res.status(200)
+    }else{
+      res.status(201).json({ message: "Invalid Token!" })
     }
   }
 }

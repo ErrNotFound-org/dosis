@@ -32,6 +32,8 @@ export default async function handler(req, res) {
           }
         }
         res.status(201).json({ message: "Success", notifications: notifications });
+    }else{
+      res.status(201).json({ message: "Invalid Token!" })
     }
   }
 }

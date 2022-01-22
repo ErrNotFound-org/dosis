@@ -19,6 +19,8 @@ export default async function handler(req, res) {
         }
         alllabResults[user._id] = user.labResults || [];
         res.status(200).json({ labResults: alllabResults });
+    }else{
+      res.status(201).json({ message: "Invalid Token!" })
     }
   }
 }
