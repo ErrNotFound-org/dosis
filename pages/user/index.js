@@ -19,7 +19,8 @@ export default function Home() {
       router.push("/doctor")
     }else{
       console.log("hello world")
-      setUsername(userFound.data.username);
+      // Fixed it. @bobby
+      setUsername(userFound.data.user.username);
       return userFound;
 
     }

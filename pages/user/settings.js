@@ -45,6 +45,9 @@ export default function Home() {
           <h1 className="font-raleway text-[14px] text-[#432C81]">
             garapatiakshith@gmail.com
           </h1>
+          <h1 className="font-raleway text-[14px] text-[#432C81]">
+            User's ID
+          </h1>
 
           <form className="rounded-md shadow-md w-[600px] mt-[60px] overflow-y-scroll">
             <div className="p-10">

@@ -1,6 +1,45 @@
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { useState } from "react";
+import axios from "axios";
+import {useRouter} from "next/router"
 
 export default function BlogCreate() {
+
+  const router = useRouter();
+
+
+  var user = Cookies.get("user");
+  console.log("This is the cookie: " + user)
+  const [username, setUsername] = useState("");
+
+  async function getUser(token) {
+    const userFound = await axios.post(`/api/doctor/get`, { token });
+    console.log(userFound.data);
+    
+    // If the token was not found then do the FOLLOWING (DOWN ARROW)
+  
+    if (userFound.data.message === "Incorrect token"){
+
+          router.push("/user")
+    } else{
+      console.log("Hello World")
+   setUsername(userFound.data.user.username);
+     return userFound;
+    }
+    
+ 
+   
+  }
+
+    if (!user) {
+    return <h1>Not LOGGED IN</h1>;
+  } else {
+
+    user = JSON.parse(user);
+    const userResult = getUser(user.token);
+    console.log(userResult)
+
   return (
     <div className="h-screen p-[40px] w-screen">
       <div className="w-screen h-1/6 flex justify-center items-center w-full">
@@ -36,4 +75,5 @@ export default function BlogCreate() {
       </div>
     </div>
   );
+  }
 }

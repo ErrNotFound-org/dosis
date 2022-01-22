@@ -1,7 +1,52 @@
 import Image from "next/image";
 import Link from "next/link";
+//auth lock this too.
+import Cookies from "js-cookie";
+import { useState } from "react";
+import axios from "axios";
+import {useRouter} from "next/router"
+
+
+
+
 
 export default function Home() {
+     const router = useRouter();
+
+
+  var user = Cookies.get("user");
+  console.log("This is the cookie: " + user)
+  const [username, setUsername] = useState("");
+
+  async function getUser(token) {
+    const userFound = await axios.post(`/api/doctor/get`, { token });
+    console.log(userFound.data);
+    
+    // If the token was not found then do the FOLLOWING (DOWN ARROW)
+  
+    if (userFound.data.message === "Incorrect token"){
+
+          router.push("/user")
+    } else{
+      console.log("Hello World")
+   setUsername(userFound.data.user.username);
+     return userFound;
+    }
+    
+ 
+   
+  }
+
+
+  if (!user) {
+    return <h1>Not LOGGED IN</h1>;
+  } else {
+
+    user = JSON.parse(user);
+    const userResult = getUser(user.token);
+    console.log(userResult)
+
+
   return (
     <div className="h-screen">
       <div className="h-1/6">
@@ -107,4 +152,6 @@ export default function Home() {
       </div>
     </div>
   );
+  }
 }
+

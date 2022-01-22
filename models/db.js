@@ -6,7 +6,7 @@ export async function connectToDatabase() {
   );
   const db = client.db("dosisdata");
 
-  const users = db.collection("users");
+  const users = db.collection("user");
   const doctors = db.collection("Doctor");
   return { db, users, doctors };
 }
