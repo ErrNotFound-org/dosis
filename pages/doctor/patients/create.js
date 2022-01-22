@@ -1,44 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 //auth lock this too.
-import Cookies from "js-cookie";
 import { useState } from "react";
+import Cookies from "js-cookie";
 import axios from "axios";
 import {useRouter} from "next/router";
 import { useCookies } from "react-cookie";
 
 
 export default function Home() {
-  
-  // creating the cookies for user
-
-
- 
-  
-
-  const router = useRouter();
-
-
-  var user = Cookies.get("user");
-  console.log("This is the cookie: " + user)
-  const [username, setUsername] = useState("");
-
-  async function getUser(token) {
-    const userFound = await axios.post(`/api/doctor/get`, { token });
-    console.log(userFound.data);
-    
-    // If the token was not found then do the FOLLOWING (DOWN ARROW)
-  
-    if (userFound.data.message === "Incorrect token"){
-
-          router.push("/user")
-    } else{
-      console.log("Hello World")
-      setUsername(userFound.data.user.username);
-     return userFound;
-    }
-  }
-
   const [userId, setUserId] = useState("");
   const [heading, setHeading] = useState("")
   const [reason, setReason] = useState("")
@@ -49,56 +19,53 @@ export default function Home() {
   const [endDate, setEndDate] = useState()
   const [time, setTime] = useState()
   
+  
+  let user = Cookies.get("user")
+  // console.log(user)
+  const router = useRouter();
+  let token = "";
+  async function getUser(token) {
+    const userFound = await axios.post('/api/doctor/get', {token});
+    if(userFound.data.message === "Incorrect token"){
+      router.push("/")
+    }else{
+      console.log(userFound.data)
+      return userFound;
+    }
+  }
+
+if(!user){
+  return(
+    <h1>You're not logged in</h1>
+  )
+}else{
+  user = JSON.parse(user)
+  token = user.token
+  user = getUser(token)
+}
 
   const submitHandler =  async (e) => {
-
-    
     e.preventDefault()
-    // getting the object or creating it
+    console.log(userId)
     const obj = {
       heading: heading,
       reason: reason,
       comments: comments,
-      user: userId, 
-      doctor: user.token, // gotta check
+      userid: userId, 
+      doctor: user._id,
+      token: token, // gotta check
       prescription:{
         name: prescription,
         prescriptionReason: prescriptionReason,
         startDate: startDate,
         endDate: endDate,
         time: time
-        
       } 
     }
-
-          const doctor = "this is a test";
-    
-    const response = await axios.post("/api/doctor/patients/post", {
-      heading,
-      reason,
-      comments,
-      doctor,
-      userId,
-      prescription:{
-        prescription,
-        prescriptionReason,
-        startDate,
-        endDate,
-        time
-      }
-    })
+    const response = await axios.post("/api/doctor/patients/post", obj)
+    // console.log(user.token)
     console.log(response)
-    
   } // it ends here
-
-
-  if (!user) {
-    return <h1>Not LOGGED IN</h1>;
-  } else {
-
-    user = JSON.parse(user);
-    const userResult = getUser(user.token);
-    console.log(userResult)
 
 
   return (
@@ -225,5 +192,3 @@ export default function Home() {
     </div>
   );
   }
-}
-
