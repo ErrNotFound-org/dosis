@@ -13,7 +13,14 @@ export default async function handler(req, res) {
             allergies: req.body.allergies,
             otherMedicalInformation: req.body.otherMedicalInformation
         }
-        await user.updateOne({"token": token}, data)
+        const doctorid = req.body.doctor
+        if (doctorid!=""){
+          let doctor = await doctors.findOne({ _id: doctorid });
+          if (doctor){
+            await users.updateOne({ _id: user._id }, { $push: { doctors: doctorid } }, { upsert: true });
+          }
+          await user.updateOne({"token": token}, data)
+        }
         res.status(200)
     }
   }
