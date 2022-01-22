@@ -38,7 +38,7 @@ export default function Home() {
         </div>
 
         <div className="w-screen flex flex-col items-center h-5/6">
-          <Image src="/defaultProfilePic" alt="" />
+          <Image src="/defaultProfilePic" width={228} height={216} alt="" />
           <h1 className="mt-[10px] font-bold font-raleway text-[24px] text-[#432C81]">
             User&apos;s Full Name
           </h1>
@@ -103,6 +103,7 @@ export default function Home() {
                   rows="5"
                 ></textarea>
               </div>
+
               <div className="block mt-[10px]">
                 <label className="font-raleway text-[#432C81] text-[24px]">
                   Other Relevant Medical Information:
@@ -114,6 +115,16 @@ export default function Home() {
                   cols="60"
                   rows="5"
                 ></textarea>
+              </div>
+              <div className="block mt-[10px]">
+                <label className="font-raleway text-[#432C81] text-[24px]">
+                  Add Doctor:
+                </label>
+                <input
+                  placeholder="Add Doctor's ID name to allow them to access your entire medical history"
+                  type="text"
+                  className="border-0 outline-0 border-b-[2px] border-b-solid ml-[10px] w-[225px]"
+                />
               </div>
               <div className="w-full flex justify-center items-center">
                 <button className="bg-[#432C81] p-[10px] rounded-md mt-[15px] font-raleway text-white">
