@@ -12,28 +12,22 @@ export default function Home() {
   
   // creating the cookies for user
 
-
- 
-  
-
   const router = useRouter();
 
-
   var user = Cookies.get("user");
-  console.log("This is the cookie: " + user)
+
+  
   const [username, setUsername] = useState("");
 
   async function getUser(token) {
     const userFound = await axios.post(`/api/doctor/get`, { token });
-    console.log(userFound.data);
+
     
     // If the token was not found then do the FOLLOWING (DOWN ARROW)
-  
     if (userFound.data.message === "Incorrect token"){
-
           router.push("/user")
     } else{
-      console.log("Hello World")
+
       setUsername(userFound.data.user.username);
      return userFound;
     }
@@ -43,63 +37,44 @@ export default function Home() {
   const [heading, setHeading] = useState("")
   const [reason, setReason] = useState("")
   const [comments, setComments] = useState("")
-  const [prescription, setPrescription] = useState("")
+  const [name, setName] = useState("")
   const [prescriptionReason, setPrescriptionReason] = useState("")
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const [time, setTime] = useState()
   
-
+  
   const submitHandler =  async (e) => {
-
-    
     e.preventDefault()
-    // getting the object or creating it
-    const obj = {
-      heading: heading,
-      reason: reason,
-      comments: comments,
-      user: userId, 
-      doctor: user.token, // gotta check
-      prescription:{
-        name: prescription,
-        prescriptionReason: prescriptionReason,
-        startDate: startDate,
-        endDate: endDate,
-        time: time
-        
-      } 
-    }
 
-          const doctor = "this is a test";
+ 
+    user = JSON.parse(user);
+    const token = getUser(user.token);
+    
     
     const response = await axios.post("/api/doctor/patients/post", {
       heading,
       reason,
-      comments,
       doctor,
+      token,
+      comments,
       userId,
       prescription:{
-        prescription,
+        name,
         prescriptionReason,
         startDate,
         endDate,
         time
       }
     })
-    console.log(response)
-    
-  } // it ends here
-
+    // Uncaught (in promise) SyntaxError: Unexpected token o in JSON at position 1    
+  } 
 
   if (!user) {
     return <h1>Not LOGGED IN</h1>;
   } else {
-
-    user = JSON.parse(user);
+    user = JSON.parse(user)
     const userResult = getUser(user.token);
-    console.log(userResult)
-
 
   return (
     <div className="h-screen">
@@ -164,8 +139,8 @@ export default function Home() {
               type="text"
               placeholder="Name of the Prescription(s)"
               className="border-[5px] border-solid border-black h-[35px] w-[374px] rounded-[15px] p-[15px] font-roboto text-[15px] block mt-[30px]"
-              value={prescription}
-              onChange={(e) => setPrescription(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="flex">

@@ -32,7 +32,7 @@ export default function Home() {
             <Link passHref={true} href="/user/history">
               <a>
                 <div></div>
-                <Image src="/arrow" w={149} h={46} alt="" />
+                <Image src="/arrow" width={149} height={46} alt="" />
               </a>
             </Link>
           </div>
