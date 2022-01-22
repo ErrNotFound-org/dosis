@@ -2,48 +2,38 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import axios from "axios";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
 
 import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
 
-
   var user = Cookies.get("user");
-  console.log("This is the cookie: " + user)
+  console.log("This is the cookie: " + user);
   const [username, setUsername] = useState("");
 
   async function getUser(token) {
     const userFound = await axios.post(`/api/doctor/get`, { token });
     console.log(userFound.data);
-    
+
     // If the token was not found then do the FOLLOWING (DOWN ARROW)
-  
-    if (userFound.data.message === "Incorrect token"){
 
-          router.push("/user")
-    } else{
-      console.log("Hello World")
-   setUsername(userFound.data.user.username);
-     return userFound;
+    if (userFound.data.message === "Incorrect token") {
+      router.push("/user");
+    } else {
+      console.log("Hello World");
+      setUsername(userFound.data.user.username);
+      return userFound;
     }
-    
- 
-   
   }
-
 
   if (!user) {
     return <h1>Not LOGGED IN</h1>;
   } else {
-
     user = JSON.parse(user);
     const userResult = getUser(user.token);
-    console.log(userResult)
-
-    
- 
+    console.log(userResult);
 
     return (
       <div className="h-screen">
@@ -77,6 +67,17 @@ export default function Home() {
 
         <div className="h-5/6 w-screen flex">
           <div className="w-4/6 flex flex-col justify-center items-center">
+            <form>
+              <input
+                type="text"
+                className="w-[350px] h-[55px] mb-[40px] drop-shadow-lg rounded-[5px] bg-[#e5e5e5] p-[20px] mr-[20px]"
+                placeholder="Add New ID"
+              />
+              <button className="bg-[#432C81] p-[10px] rounded-md mt-[15px] font-raleway text-white h-[55px]">
+                Submit
+              </button>
+            </form>
+
             <Link passHref={true} href="/doctor/patients/create">
               <a>
                 <div className="border-[5px] border-solid border-[#000000] rounded-[15px] p-[26px] w-[350px] flex justify-center items-center">
