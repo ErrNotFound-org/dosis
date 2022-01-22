@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Image from "next/image";
 import NotificationCard from "../../components/NotificationCard";
@@ -77,7 +76,7 @@ export default function Home() {
             />
           </div>
           <div className="w-1/6 mr-[40px]">
-            <Image src="/notifications" alt="" />
+            <Image src="/notifications" alt="" width={294} height={300} />
           </div>
         </div>
       </div>
