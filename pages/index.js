@@ -4,8 +4,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="h-screen">
-
-    
       <div className="flex flex-col h-screen justify-center items-center">
         <Image
           alt=""
