@@ -17,4 +17,4 @@ and communicate with the doctors you visit. Dosis will also allow for
 easier management of the different Patients that a
 doctor has had and to further digitlialize the process of written reports.
 
-![image](https://user-images.githubusercontent.com/57910021/150644737-fbafa724-fd56-4829-998c-75a8a8094205.png)
+
