@@ -43,6 +43,7 @@ export default function Home({ movies }) {
           />
             )
           })}
+          
 
           {movies.map((movie) => {
             return(
