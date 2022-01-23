@@ -3,8 +3,8 @@ import Link from "next/link";
 export default function BlogCard(props) {
   return (
     <div className="w-[800px] h-[400px] border-[2px] border-solid border-[#EDECF4] rounded-[8px] p-[16px] block my-[20px]">
-      <Link passHref={true} href={"/blogs/" + props.id}>
-        <a>
+    
+       
           <div className="flex h-4/6">
             <Image src="/defaultProfilePic.png" height={54} width={57} />
 
@@ -25,8 +25,8 @@ export default function BlogCard(props) {
           <h2 className="font-inter text-[14px] text-[##7B6BA8] mt-[10px]">
             {props.blogStart}
           </h2>
-        </a>
-      </Link>
+    
+    
     </div>
   );
 }

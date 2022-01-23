@@ -15,6 +15,7 @@ export default function Home() {
   var user = Cookies.get("user");
   console.log("This is the cookie: " + user)
   const [username, setUsername] = useState("");
+  const [medicalHistory, setMedicalHistory] = useState("")
 
   async function getUser(token) {
     const userFound = await axios.post(`/api/doctor/get`, { token });
@@ -26,9 +27,10 @@ export default function Home() {
 
           router.push("/user")
     } else{
-      console.log("Hello World")
-   setUsername(userFound.data.user.username);
-     return userFound;
+       setUsername(userFound.data.user.username);
+      setMedicalHistory(userFound.data.user.labResults);
+    // console.log(medicalHistory) // is this working
+    return userFound;
     }
     
  
@@ -44,13 +46,13 @@ export default function Home() {
     console.log(userResult)
 
   return (
-    <div className="h-screen">
+   <div className="h-screen">
       <div className="h-1/6">
         <div className="pl-[30px] pt-[30px]">
           <Link passHref={true} href="/doctor">
             <a>
               <div></div>
-              <Image src="/arrow.png" width={149} height={46} alt="" />
+           <Image src="/arrow.png" width={149} height={46} alt="" />
             </a>
           </Link>
         </div>

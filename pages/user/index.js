@@ -82,7 +82,7 @@ export default function Home() {
       </div>
 
       <div className="h-5/6 w-screen flex">
-        <div className="w-4/6 flex justify-center items-center">
+        <div className="w-4/6 flex flex-col justify-center items-center mt-[20px]">
           <Image src="/userImg.png" alt="" width={294} height={300} />
            <form>
               <input

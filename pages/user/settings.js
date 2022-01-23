@@ -143,8 +143,8 @@ export default function Home() {
                   Add Doctor:
                 </label>
                 <input
-                          value={doctorId} 
-                  onChange = {e => setDoctorId(e.target.value)}
+                          value={doctorID} 
+                  onChange = {e => setDoctorID(e.target.value)}
                   placeholder="Add Doctor's ID name to allow them to access your entire medical history"
                   type="text"
                   className="border-0 outline-0 border-b-[2px] border-b-solid ml-[10px] w-[225px]"
