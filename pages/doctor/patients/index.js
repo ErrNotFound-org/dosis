@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter();
 
   
-  let medicalHistory;
+  let [medicalHistory, setMedicalHistory] = useState([]);
 
   var user = Cookies.get("user");
   // console.log("This is the cookie: " + user)
@@ -27,8 +27,8 @@ export default function Home() {
     } else{
       // console.log("Hello World")
       setUsername(userFound.data.user.username);
-      medicalHistory = userFound.data.user.medicalHistory;
-    console.log(medicalHistory)
+      setMedicalHistory(userFound.data.user.medicalHistory);
+    // console.log(medicalHistory) // is this working
     return userFound;
     }
   }
@@ -60,7 +60,15 @@ export default function Home() {
 
         <div className="h-5/6 flex justify-center mt-[70px]">
           <div className="h-5/6 flex flex-col items-center overflow-y-scroll w-5/6 w-[750px] scrollbar-hide">
-            <HistoryCard
+            {/* where are we getting this data from? */}
+
+              {medicalHistory.map(diagnosis => <HistoryCard
+              reason={diagnosis.reason}
+              generalComments={diagnosis.comments}
+              route={"/doctor/patients/" + diagnosis.id}
+            />)}
+
+            {/* <HistoryCard
               reason="Hello World"
               generalComments="Lorem ipsum dolor sit amet consectetur adipisicing elit. A aliquid, fugit magnam distinctio eligendi animi adipisci necessitatibus aperiam perspiciatis corporis reprehenderit fuga, facilis alias eveniet."
               route={"/doctor/patients/" + variable}
@@ -90,7 +98,7 @@ export default function Home() {
               reason="Hello World"
               generalComments="Lorem ipsum dolor sit amet consectetur adipisicing elit. A aliquid, fugit magnam distinctio eligendi animi adipisci necessitatibus aperiam perspiciatis corporis reprehenderit fuga, facilis alias eveniet."
               route={"/doctor/patients/" + variable}
-            />
+            /> */}
           </div>
         </div>
       </div>
