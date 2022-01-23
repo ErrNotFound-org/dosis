@@ -8,5 +8,6 @@ export async function connectToDatabase() {
 
   const users = db.collection("user");
   const doctors = db.collection("Doctor");
-  return { db, users, doctors };
+  const blogs = db.collection("blogs")
+  return { db, users, doctors, blogs };
 }

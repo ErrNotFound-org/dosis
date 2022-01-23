@@ -110,6 +110,25 @@ export default function Home() {
                 Get Started!
               </h1>
 
+
+                <Link passHref={true} href="/doctor/blog">
+                <a>
+                  <div className="w-[475px] h-[136px] px-[16px] rounded-[12px] bg-[#EDECF4] flex justify-center items-center mt-[60px] mb-[60px]">
+                    <div className="grid grid-cols-2 gap-32 place-items-center">
+                      <h1 className="font-bold font-raleway text-[20px] text-[#432C81]">
+                        Blog
+                      </h1>
+                      <Image
+                        src="/doctorPatientsIcon.png"
+                        alt=""
+                        width={144}
+                        height={108}
+                      />
+                    </div>
+                  </div>
+                </a>
+              </Link>
+
               <Link passHref={true} href="/doctor/patients">
                 <a>
                   <div className="w-[475px] h-[136px] px-[16px] rounded-[12px] bg-[#EDECF4] flex justify-center items-center mt-[60px] mb-[60px]">

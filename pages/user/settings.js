@@ -6,6 +6,11 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Home() {
+
+
+
+
+
   var user = Cookies.get("user");
   const [username, setUsername] = useState("");
 
@@ -15,6 +20,14 @@ export default function Home() {
     setUsername(userFound.data.user.username);
     return userFound;
   }
+
+  const [name, setName] = useState("") // should initialize to previous value 
+  const [bloodGroup, setBloodGroup] = useState("")
+  const [gender, setGender] = useState("")
+  const [allergies, setAllergies] = useState("")
+  const [age, setAge] = useState("")
+  const [otherInformation, setOtherInformation] = useState("")
+  const [doctorID, setDoctorID] = useState("")
 
   if (!user) {
     return <h1>Not LOGGED IN</h1>;
@@ -55,7 +68,7 @@ export default function Home() {
                 <label className="font-raleway text-[#432C81] text-[24px]">
                   Blood Group:
                 </label>
-                <select className="ml-[10px]">
+                <select className="ml-[10px]" value={bloodGroup} onChange = {e => setBloodGroup(e.target.value)}>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
                   <option value="B+">B+</option>
@@ -73,13 +86,14 @@ export default function Home() {
                 <input
                   type="text"
                   className="border-0 outline-0 border-b-[2px] border-b-solid ml-[10px] w-[225px]"
+                  value={name} onChange = {e => setName(e.target.value)}
                 />
               </div>
               <div className="block mt-[10px]">
                 <label className="font-raleway text-[#432C81] text-[24px]">
                   Gender:
                 </label>
-                <select className="ml-[10px]">
+                <select className="ml-[10px]" value={gender} onChange = {e => setGender(e.target.value)}>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Prefer Not To Say">Prefer Not to Say</option>
@@ -92,6 +106,7 @@ export default function Home() {
                 <input
                   type="number"
                   className="border-0 outline-0 border-b-[2px] border-b-solid ml-[10px] w-[50px]"
+                  value={age} onChange = {e => setAge(e.target.value)}
                 />
               </div>
               <div className="block mt-[10px]">
@@ -99,6 +114,8 @@ export default function Home() {
                   Allergies (if any):
                 </label>
                 <textarea
+                 value={allergies} 
+                  onChange = {e => setAllergies(e.target.value)}
                   className="block shadow-md"
                   name=""
                   id=""
@@ -112,6 +129,8 @@ export default function Home() {
                   Other Relevant Medical Information:
                 </label>
                 <textarea
+                          value={otherInformation} 
+                  onChange = {e => setOtherInformation(e.target.value)}
                   className="block shadow-md"
                   name=""
                   id=""
@@ -124,6 +143,8 @@ export default function Home() {
                   Add Doctor:
                 </label>
                 <input
+                          value={doctorId} 
+                  onChange = {e => setDoctorId(e.target.value)}
                   placeholder="Add Doctor's ID name to allow them to access your entire medical history"
                   type="text"
                   className="border-0 outline-0 border-b-[2px] border-b-solid ml-[10px] w-[225px]"
