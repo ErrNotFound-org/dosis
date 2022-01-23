@@ -55,7 +55,7 @@ if(!user){
       doctor: user._id,
       token: token, // gotta check
       prescription:{
-        name: prescription,
+        name: name,
         prescriptionReason: prescriptionReason,
         startDate: startDate,
         endDate: endDate,

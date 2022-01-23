@@ -84,6 +84,16 @@ export default function Home() {
       <div className="h-5/6 w-screen flex">
         <div className="w-4/6 flex justify-center items-center">
           <Image src="/userImg.png" alt="" width={294} height={300} />
+           <form>
+              <input
+                type="text"
+                className="w-[350px] h-[55px] mb-[40px] drop-shadow-lg rounded-[5px] bg-[#e5e5e5] p-[20px] mr-[20px]"
+                placeholder="Add New ID"
+              />
+              <button className="bg-[#432C81] p-[10px] rounded-md mt-[15px] font-raleway text-white h-[55px]">
+                Submit
+              </button>
+            </form>
         </div>
         <div className="w-2/6 flex-col">
           <div className="h-2/6 flex flex-col justify-center items-center text-right float-right">
