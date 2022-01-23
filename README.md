@@ -17,7 +17,8 @@ and communicate with the doctors you visit. Dosis will also allow for
 easier management of the different Patients that a
 doctor has had and to further digitlialize the process of written reports.
 
-This project was a finalist at the Oakridge Codefest 2022 Hackathon!
-[Devpost](https://devpost.com/software/dosis?ref_content=user-portfolio&ref_feature=in_progress)
+**This project was a finalist at the Oakridge Codefest 2022 Hackathon**!
+<br />
+[Find out more on Devpost!](https://devpost.com/software/dosis?ref_content=user-portfolio&ref_feature=in_progress)
 
 
